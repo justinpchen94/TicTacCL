@@ -1,0 +1,12 @@
+{
+  "name": "tictac",
+  "version": "1.0.0",
+  "description": "Command Line tic tac toe",
+  "main": "index.js",
+  "repository": {
+    "url": "https://github.com/justinpchen94/TicTacCL.git",
+    "type": "git"
+  },
+  "author": "Justin Chen <justinpchen94@gmail.com>",
+  "license": "MIT"
+}
