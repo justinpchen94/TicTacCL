@@ -20,6 +20,8 @@ let spaces = 9;
 const startNewGame = () => {
   console.log("Starting new game")
   currGame = newGame();
+  space = 9;
+  currPlayer = 0;
 }
 
 const winGame = () => {
@@ -30,17 +32,19 @@ const tieGame = () => {
   console.log('The game is tied!')
 }
 
-const printBoard = () => {
+const printBoard = (b = currboard) => {
   console.log(' --- --- ---')
-  console.log('|   |   |   |')
+  console.log(`| ${b[0][0]} | ${b[0][1]} | ${b[0][2]} |`)
   console.log(' --- --- ---')
-  console.log('|   |   |   |')
+  console.log(`| ${b[1][0]} | ${b[1][1]} | ${b[1][2]} |`)
   console.log(' --- --- ---')
-  console.log('|   |   |   |')
+  console.log(`| ${b[2][0]} | ${b[2][1]} | ${b[2][2]} |`)
   console.log(' --- --- ---')
 
 }
-
+const checkTie = () => {
+  return spaces !== 0
+}
 const checkWin = () => {
   let checkMark = marker[currPlayer]
 
@@ -67,9 +71,6 @@ const checkWin = () => {
 
   if (currGame[0][0] === currGame[1][1] === currGame[2][2] === checkMark) return winGame();
   else if (currGame[0][2] === currGame[1][1] === currGame[2][0] === checkMark) return winGame();
-
-  //check if tie game
-  if (spaces === 0) return tieGame();
   
 
 }
