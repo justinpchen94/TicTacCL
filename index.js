@@ -26,10 +26,12 @@ const startNewGame = () => {
 
 const winGame = () => {
   console.log('Player' + (currPlayer + 1), 'has won!');
+  return true;
 }
 
 const tieGame = () => {
   console.log('The game is tied!')
+  return true;
 }
 
 const printBoard = () => {
@@ -53,26 +55,27 @@ const checkWin = () => {
   for (let i = 0; i < 3; i++) {
     let isRowWin = true;
     for (let j = 0; j < 3; j++) {
-      isRowWin = isRowWin && currGame[i][j] !== checkMark;
+      isRowWin = isRowWin && (currGame[i][j] === checkMark);
     }
+    if (isRowWin) return winGame();
   }
 
-  if (isRowWin) return winGame();
 
   //check cols
   for (let i = 0; i < 3; i++) {
     let isColWin = true;
     for (let j = 0; j < 3; j++) {
-      isRowWin = isRowWin && currGame[j][i] !== checkMark;
+      isColWin = isColWin && (currGame[j][i] === checkMark);
     }
+    if (isColWin) return winGame();
+
   }
-  if (isColWin) return winGame();
 
   //check two diags
 
   if (currGame[0][0] === currGame[1][1] === currGame[2][2] === checkMark) return winGame();
   else if (currGame[0][2] === currGame[1][1] === currGame[2][0] === checkMark) return winGame();
-  
+
 
 }
 
@@ -83,26 +86,30 @@ const applyMove = (space) => {
   let coordinates = [row, col];
 
   //invalid input
-  if (currGame[row,col] != space) {
-
+  if (currGame[row][col] != space) {
+    console.log(currGame[row][col],space)
+    console.log('Invalid Input')
   } else {
-    currGame[row,col] = marker[currPlayer];
+    currGame[row][col] = marker[currPlayer];
     spaces--;
-    checkWin();
     currPlayer = (currPlayer + 1) % 2;
   }
-  
+  printBoard();
+
 }
 
-
+const playGame = () => {
+  while (!checkWin()) {
+    console.log(`It is Player ${currPlayer + 1}'s turn`)
+    prompt.get(['space'], (err,res) => {
+      applyMove(res.space)
+    })
+  }
+}
 
 prompt.start();
 
 //start a new game
 startNewGame()
 printBoard()
-prompt.get([], (err, res) => {
-  while (!checkWin()) {
-    console.log(`It is Player ${currPlayer + 1}'s turn!`)
-  }
-})
+playGame();
