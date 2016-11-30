@@ -8,5 +8,8 @@
     "type": "git"
   },
   "author": "Justin Chen <justinpchen94@gmail.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "prompt": "^1.0.0"
+  }
 }
