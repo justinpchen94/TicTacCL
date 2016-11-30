@@ -32,7 +32,8 @@ const tieGame = () => {
   console.log('The game is tied!')
 }
 
-const printBoard = (b = currboard) => {
+const printBoard = () => {
+  let b = currGame;
   console.log(' --- --- ---')
   console.log(`| ${b[0][0]} | ${b[0][1]} | ${b[0][2]} |`)
   console.log(' --- --- ---')
@@ -43,7 +44,7 @@ const printBoard = (b = currboard) => {
 
 }
 const checkTie = () => {
-  return spaces !== 0
+  return spaces !== 0;
 }
 const checkWin = () => {
   let checkMark = marker[currPlayer]
@@ -101,5 +102,7 @@ prompt.start();
 startNewGame()
 printBoard()
 prompt.get([], (err, res) => {
-  console.log(res.message)
+  while (!checkWin()) {
+    console.log(`It is Player ${currPlayer + 1}'s turn!`)
+  }
 })
